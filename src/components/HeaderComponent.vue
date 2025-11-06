@@ -25,9 +25,6 @@ import { RouterLink } from 'vue-router'
           <p class="ml-2">Home</p>
         </router-link>
       </li>
-      <router-link to="/" class="flex items-center px-4 py-2 rounded-lg hover:bg-[#101829] hover:text-white"><i
-          class="fa-solid fa-house"></i>
-      </router-link>
         <li>
           <router-link to="/" class="flex items-center px-4 py-2 rounded-lg hover:bg-[#101829] hover:text-white"><i
               class="fa-solid fa-film"></i>
