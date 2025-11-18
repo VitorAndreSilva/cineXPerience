@@ -5,10 +5,10 @@ import FooterComponent from './components/FooterComponent.vue';
 </script>
 
 <template>
-  <div class="bg-[#050A1C] text-white font-sans">
+  <div class="bg-[#050A1C] text-white font-sans flex flex-col min-h-screen justify-between">
     <HeaderComponent />
     <RouterView />
-    <FooterComponent />
+    <FooterComponent class="bg-[#050A1C]" />
   </div>
 </template>
 
