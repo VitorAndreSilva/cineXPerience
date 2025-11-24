@@ -1,16 +1,16 @@
 <script setup>
 import FilterComponent from '@/components/FilterComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
-import { useMovieStore } from '@/stores/movies';
+import { useSerieStore } from '@/stores/series';
 import { useGenreStore } from '@/stores/genre';
 import { onMounted } from 'vue';
 
-const movieStore = useMovieStore();
+const serieStore = useSerieStore();
 const genreStore = useGenreStore();
 
 onMounted(async (genreId) => {
   await genreStore.getAllGenres('movie');
-  await movieStore.listMovies(genreId);
+  await serieStore.listSeries(genreId);
 })
 </script>
 <template>
@@ -23,7 +23,7 @@ onMounted(async (genreId) => {
       <p class="text-xl py-4 text-[#94A3B8] pt-1 pb-6 pl-32">Explore filmes lendários de 1990-2009</p>
       <FilterComponent />
       <CardComponent 
-      :movies="movieStore.movies"
+      :movies="serieStore.series"
       />
     </section>
   </main>
