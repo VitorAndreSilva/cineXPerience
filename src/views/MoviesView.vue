@@ -3,7 +3,7 @@ import FilterComponent from '@/components/FilterComponent.vue';
 import CardComponent from '@/components/CardComponent.vue';
 import { useMovieStore } from '@/stores/movies';
 import { useGenreStore } from '@/stores/genre';
-import { onMounted } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 
 const movieStore = useMovieStore();
 const genreStore = useGenreStore();
@@ -11,6 +11,23 @@ const genreStore = useGenreStore();
 onMounted(async (genreId) => {
   await genreStore.getAllGenres('movie');
   await movieStore.listMovies(genreId);
+})
+
+const search = ref('');
+const filterYear = ref('');
+const filterGenre = ref('');
+
+const filteredMovies = computed(() => {
+    return movieStore.movies
+    .filter(movie => 
+        movie.title.toLowerCase().includes(search.value.toLowerCase())
+    )
+    .filter(movie =>
+        filterYear.value ? movie.release_date.startsWith(filterYear.value) : true
+    )
+    .filter(movie =>
+        filterGenre.value ? movie.genre_ids.includes(Number(filterGenre.value)) : true
+    )
 })
 </script>
 <template>
@@ -21,9 +38,13 @@ onMounted(async (genreId) => {
         <h1 class="text-5xl"><strong>Filmes Clássicos</strong></h1>
       </div>
       <p class="text-xl py-4 text-[#94A3B8] pt-1 pb-6 pl-32">Explore filmes lendários de 1990-2009</p>
-      <FilterComponent />
+      <FilterComponent 
+      @filter:search="search = $event"
+      @filter:year="filterYear = $event"
+      @filter:genre="filterGenre = $event"
+      />
       <CardComponent 
-      :movies="movieStore.movies"
+      :movies="filteredMovies"
       />
     </section>
   </main>
