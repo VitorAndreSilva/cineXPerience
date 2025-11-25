@@ -27,7 +27,7 @@ import { RouterLink } from 'vue-router';
           </router-link>
         </li>
         <li>
-          <router-link to="/movies"
+          <router-link to="/about"
             class="flex items-center px-8 py-4 rounded-xl text-xl mt-8 bg-gray-800/50 border border-gray-600 hover:bg-gray-600/60 transition duration-500 ease-in-out">
             <p>Saiba mais</p>
           </router-link>
