@@ -8,10 +8,26 @@ import MoviesDetailView from '@/views/MoviesDetailView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', name: 'home', component: HomeView },
-    { path: '/movies', name: 'movies', component: MoviesView },
-    { path: '/series', name: 'series', component: SeriesView },
-    { path: '/about', name: 'about', component: AboutView },
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/movies',
+      name: 'movies',
+      component: MoviesView
+    },
+    {
+      path: '/series',
+      name: 'series',
+      component: SeriesView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
+    },
     {
       path: '/movie/:movieId',
       name: 'MovieDetail',
