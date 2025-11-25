@@ -1,7 +1,6 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-import { useMovieStore } from '@/stores/movies';
 import { useGenreStore } from '@/stores/genre';
 import 'swiper/css';
 import 'swiper/css/bundle';
@@ -9,28 +8,30 @@ import { onMounted } from 'vue';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
-const movieStore = useMovieStore();
 const genreStore = useGenreStore();
 
-onMounted(async (genreId) => {
+onMounted(async () => {
   await genreStore.getAllGenres('movie');
-  await movieStore.listMovies(genreId);
+})
+
+const props = defineProps({
+  movies: { type: Array }
 })
 </script>
 
 <template>
 
   <swiper :modules="modules" :slides-per-view="6.5" :space-between="50" navigation>
-    <swiper-slide class="p-5" v-for="movie in movieStore.movies" :key="movie.id">
+    <swiper-slide class="p-5" v-for="movie in props.movies" :key="movie.id">
       <div
         class="bg-[#0B1224] h-130 w-60 rounded-xl transition duration-600 ease-in-out hover:shadow-[0_0_10px_5px_rgba(168,85,247,0.6)]">
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Imagem Filme" class="rounded-2xl ">
         <div class="p-3">
-          <p><strong>{{ movie.title }}</strong></p>
+          <p><strong>{{ movie.title || movie.name }}</strong></p>
           <ul class="flex justify-between mt-2 mb-3">
             <li class="flex items-center text-[#94A3B8]">
               <i class="fa-regular fa-calendar"></i>
-              <p>{{ movie.release_date }}</p>
+              <p>{{ movie.release_date || movie.first_air_date }}</p>
             </li>
             <li class="flex items-center text-[#FACC15]">
               <i class="fa-solid fa-star"></i>
