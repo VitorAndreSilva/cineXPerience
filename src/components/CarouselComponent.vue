@@ -1,29 +1,31 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, Mousewheel } from 'swiper/modules';
 import { useMovieStore } from '@/stores/movies';
 import { useGenreStore } from '@/stores/genre';
 import 'swiper/css';
 import 'swiper/css/bundle';
 import { onMounted } from 'vue';
 
-const modules = [Navigation, Pagination, Scrollbar, A11y];
+const modules = [Navigation, Pagination, Scrollbar, A11y, Mousewheel];
 
 const movieStore = useMovieStore();
 const genreStore = useGenreStore();
 
-onMounted(async (genreId) => {
+onMounted(async () => {
   await genreStore.getAllGenres('movie');
-  await movieStore.listMovies(genreId);
-})
+  await movieStore.listMovies();
+});
 </script>
 
 <template>
 
-  <swiper :modules="modules" :slides-per-view="6.5" :space-between="50" navigation>
+  <swiper :modules="modules" :slides-per-view="6.5" :space-between="50" navigation cssMode mousewheel>
+
     <swiper-slide class="p-5" v-for="movie in movieStore.movies" :key="movie.id">
-      <div
-        class="bg-[#0B1224] w-60 rounded-xl flex flex-col h-full transition duration-600 ease-in-out hover:shadow-[0_0_10px_5px_rgba(168,85,247,0.6)]">
+      <!-- CARD CLICÁVEL -->
+      <router-link :to="{ name: 'MovieDetail', params: { movieId: movie.id } }"
+        class="bg-[#0B1224] w-60 rounded-xl flex flex-col h-full transition duration-600 ease-in-out hover:shadow-[0_0_10px_5px_rgba(168,85,247,0.6)] cursor-pointer">
 
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Imagem Filme"
           class="rounded-2xl w-full" />
@@ -51,7 +53,9 @@ onMounted(async (genreId) => {
           </ul>
 
         </div>
-      </div>
+
+      </router-link>
+
     </swiper-slide>
 
   </swiper>

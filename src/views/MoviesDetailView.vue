@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+
+
+</script>
 
 <template>
   <section class="px-50 py-5">
