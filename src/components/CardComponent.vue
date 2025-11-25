@@ -1,16 +1,17 @@
 <script setup>
 import { useMovieStore } from '@/stores/movies';
 import { useGenreStore } from '@/stores/genre';
-import 'swiper/css';
-import 'swiper/css/bundle';
 import { onMounted } from 'vue';
 
 const movieStore = useMovieStore();
 const genreStore = useGenreStore();
 
-onMounted(async (genreId) => {
+onMounted(async () => {
   await genreStore.getAllGenres('movie');
-  await movieStore.listMovies(genreId);
+})
+
+const props = defineProps({
+  movies: { type: Array }
 })
 </script>
 
@@ -43,7 +44,6 @@ onMounted(async (genreId) => {
             <button>{{ genreStore.getGenreName(genre_id) }}</button>
           </li>
         </ul>
-
       </div>
     </div>
 

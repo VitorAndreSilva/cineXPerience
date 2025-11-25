@@ -15,7 +15,7 @@ export const useMovieStore = defineStore('movies', () => {
     }
 
     const listMovies = async(genreId) => {
-        const response = await apiTMDB.get('discover/movie?primary_release_date.gte=1990-01-01&primary_release_date.lte=2000-12-31', {
+        const response = await apiTMDB.get('discover/movie?primary_release_date.gte=1990-01-01&primary_release_date.lte=2009-12-31', {
             params: {
                 with_genres: genreId,
                 language: 'pt-BR'
