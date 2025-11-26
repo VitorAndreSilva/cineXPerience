@@ -22,7 +22,8 @@ const props = defineProps({
       :to="{ name: 'MovieDetail', params: { movieId: movie.id } }"
       class="bg-[#0B1224] w-60 rounded-xl flex flex-col h-full transition duration-600 ease-in-out hover:shadow-[0_0_10px_5px_rgba(168,85,247,0.6)] cursor-pointer">
 
-      <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Imagem Filme" class="rounded-2xl w-full" />
+      <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Imagem Filme" class="rounded-2xl w-full" />
+      <img v-else :src="`${movie.background_image}`" alt="Imagem Filme" class="rounded-2xl w-full" />
 
       <div class="p-3 flex flex-col grow">
 
@@ -33,11 +34,11 @@ const props = defineProps({
         <ul class="flex justify-between mt-2 mb-3 text-[#94A3B8]">
           <li class="flex items-center">
             <i class="fa-regular fa-calendar"></i>
-            <p>{{ movie.release_date || movie.first_air_date }}</p>
+            <p>{{ movie.release_date || movie.first_air_date || movie.released }}</p>
           </li>
           <li class="flex items-center text-[#FACC15]">
             <i class="fa-solid fa-star"></i>
-            <p>{{ movie.vote_average }}</p>
+            <p>{{ movie.vote_average || movie.rating }}</p>
           </li>
         </ul>
 

@@ -15,15 +15,10 @@ export const useGameStore = defineStore('games', () => {
         state.currentGame = response.data;
     }
 
-    const listGames = async(genreId) => {
-        const response = await apiRAWG.get('discover/tv?first_air_date.gte=1990-01-01&first_air_date.lte=2009-12-31', {
-            params: {
-                with_genres: genreId,
-                language: 'pt-BR'
-            }
-        });
+    const listGames = async() => {
+        const response = await apiRAWG.get('games/');
         state.games = response.data.results;
-        console.log(state.games);
+        console.log("games:", state.games);
     }
 
     const clearGame = async() => {
