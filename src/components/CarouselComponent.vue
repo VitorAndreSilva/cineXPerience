@@ -1,7 +1,6 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Scrollbar, A11y, Mousewheel } from 'swiper/modules';
-import { useMovieStore } from '@/stores/movies';
 import { useGenreStore } from '@/stores/genre';
 import 'swiper/css';
 import 'swiper/css/bundle';
@@ -9,20 +8,22 @@ import { onMounted } from 'vue';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y, Mousewheel];
 
-const movieStore = useMovieStore();
 const genreStore = useGenreStore();
 
 onMounted(async () => {
   await genreStore.getAllGenres('movie');
-  await movieStore.listMovies();
 });
+
+const props = defineProps({
+  movies: { type: Array },
+})
 </script>
 
 <template>
 
   <swiper :modules="modules" :slides-per-view="6.5" :space-between="50" navigation cssMode mousewheel>
 
-    <swiper-slide class="p-5" v-for="movie in movieStore.movies" :key="movie.id">
+    <swiper-slide class="p-5" v-for="movie in props.movies" :key="movie.id">
       <!-- CARD CLICÁVEL -->
       <router-link :to="{ name: 'MovieDetail', params: { movieId: movie.id } }"
         class="bg-[#0B1224] w-60 rounded-xl flex flex-col h-full transition duration-600 ease-in-out hover:shadow-[0_0_10px_5px_rgba(168,85,247,0.6)] cursor-pointer">
