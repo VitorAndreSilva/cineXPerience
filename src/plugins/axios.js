@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const token = import.meta.env.VITE_API_TOKEN;
-const key = import.meta.env.VITE_API_KEY;
 
 const apiTMDB = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
@@ -11,10 +10,7 @@ const apiTMDB = axios.create({
 });
 
 const apiRAWG = axios.create({
-    baseURL: 'https://api.rawg.io/api/',
-    headers: {
-        Authorization: `Bearer ${key}`
-    }
+    baseURL: 'http://localhost:3000/'
 })
 
 export { apiTMDB, apiRAWG };
