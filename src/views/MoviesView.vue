@@ -45,6 +45,7 @@ const filteredMovies = computed(() => {
       />
       <CardComponent 
       :movies="filteredMovies"
+      :type="'Movie'"
       />
     </section>
   </main>

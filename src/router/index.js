@@ -5,6 +5,8 @@ import SeriesView from '@/views/SeriesView.vue'
 import GamesView from '@/views/GamesView.vue'
 import AboutView from '@/views/AboutView.vue'
 import MoviesDetailView from '@/views/MoviesDetailView.vue'
+import SeriesDetailView from '@/views/SeriesDetailView.vue'
+import GameDetailView from '@/views/GameDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,18 @@ const router = createRouter({
       path: '/movie/:movieId',
       name: 'MovieDetail',
       component: MoviesDetailView,
+      props: true,
+    },
+    {
+      path: '/serie/:serieId',
+      name: 'SerieDetail',
+      component: SeriesDetailView,
+      props: true,
+    },
+    {
+      path: '/game/:gameId',
+      name: 'GamesDetail',
+      component: GameDetailView,
       props: true,
     },
   ],

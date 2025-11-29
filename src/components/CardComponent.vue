@@ -12,6 +12,7 @@ onMounted(async () => {
 
 const props = defineProps({
   movies: { type: Array },
+  type: String
 })
 </script>
 
@@ -19,7 +20,13 @@ const props = defineProps({
   <section class="grid grid-cols-6 gap-8 ml-10">
 
     <router-link v-for="movie in props.movies" :key="movie.id"
-      :to="{ name: 'MovieDetail', params: { movieId: movie.id } }"
+      :to="{ name: props.type == 'Movie' ? 'MovieDetail'
+      : props.type == 'Serie' ? 'SerieDetail'
+      : 'GamesDetail', 
+      params: props.type == 'Movie' ? { movieId: movie.id } 
+      : props.type == 'Serie' ? { serieId: movie.id }
+      : { gameId: movie.slug }
+    }"
       class="bg-[#0B1224] w-60 rounded-xl flex flex-col h-full transition duration-600 ease-in-out hover:shadow-[0_0_10px_5px_rgba(168,85,247,0.6)] cursor-pointer">
 
       <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Imagem Filme" class="rounded-2xl w-full" />

@@ -1,23 +1,22 @@
 <script setup>
 import { defineProps, onMounted, onBeforeMount } from 'vue';
-import { useMovieStore } from '@/stores/movies';
+import { useSerieStore } from '@/stores/series';
 
-const movieStore = useMovieStore();
+const serieStore = useSerieStore();
 
 onBeforeMount(() => {
-  movieStore.clearMovies()
-
+  serieStore.clearSerie()
 });
 
 const props = defineProps({
-  movieId: {
+  serieId: {
     type: Number,
     required: true
   }
 });
 
 onMounted(async() => {
-  await movieStore.getMovieDetail(props.movieId);
+  await serieStore.getSerieDetail(props.serieId);
 })
 </script>
 
@@ -31,18 +30,18 @@ onMounted(async() => {
 
   <section class="px-50 py-5 flex">
     <div>
-      <img v-if="movieStore.currentMovie.poster_path" class="w-110 rounded-xl border-2 border-[#94a3b840]" :src="`https://image.tmdb.org/t/p/w185${movieStore.currentMovie.poster_path}`"
+      <img v-if="serieStore.currentSerie.poster_path" class="w-110 rounded-xl border-2 border-[#94a3b840]" :src="`https://image.tmdb.org/t/p/w185${serieStore.currentSerie.poster_path}`"
         alt="Poster">
 
       <div class="rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-10">
         <ul>
           <li class="flex justify-between my-2">
             <h3 class="text-[#94a3b8]">Avaliação</h3>
-            <p class="items-center"><i class="fa-solid fa-star text-[#FACC15]"></i><strong>{{ Number(movieStore.currentMovie.vote_average).toFixed(1) }}</strong></p>
+            <p class="items-center"><i class="fa-solid fa-star text-[#FACC15]"></i><strong>{{ Number(serieStore.currentSerie.vote_average).toFixed(1) }}</strong></p>
           </li>
           <li class="flex justify-between my-2">
             <h3 class="text-[#94a3b8]">Ano</h3>
-            <p><strong>{{ movieStore.currentMovie.release_date?.slice(0, 4) }}</strong></p>
+            <p><strong>{{ serieStore.currentSerie.first_air_date?.slice(0, 4) }}</strong></p>
           </li>
           <!--<li class="flex justify-between my-2">
             <h3 class="text-[#94a3b8]">Duração</h3>
@@ -57,16 +56,16 @@ onMounted(async() => {
     </div>
 
     <div class="ml-8">
-      <h1 class="text-4xl">{{ movieStore.currentMovie.title }}</h1>
-      <p class="text-[#94A3B8]">{{ movieStore.currentMovie.original_title }}</p>
+      <h1 class="text-4xl">{{ serieStore.currentSerie.name }}</h1>
+      <p class="text-[#94A3B8]">{{ serieStore.currentSerie.original_name }}</p>
       <ul class="flex my-1">
         <li class="bg-[#94A3B850] px-3 py-2 mt-2 rounded-xl hover:bg-[#94A3B880] transition duration-300 ease-in-out">
-          {{ movieStore.currentMovie.genre_ids }}</li>
+          {{ serieStore.currentSerie.genre_ids }}</li>
       </ul>
 
       <div class=" rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-6">
         <h2 class="text-xl text-[#C084FC] mb-2">Sinopse</h2>
-        <p>{{ movieStore.currentMovie.overview }}</p>
+        <p>{{ serieStore.currentSerie.overview }}</p>
       </div>
 
       <div class=" rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-6 flex items-center">
@@ -76,7 +75,7 @@ onMounted(async() => {
             <p class="text-[#94A3B8]">Direção:</p>
           </li>
           <li>
-            <p><strong>{{ movieStore.currentMovie.crew?.find(p => p.job === 'Director')?.name }}</strong></p>
+            <p><strong>{{ serieStore.currentSerie.crew?.find(p => p.job === 'Executive Producer')?.name }}</strong></p>
           </li>
         </ul>
       </div>
@@ -86,7 +85,7 @@ onMounted(async() => {
 
         <ul class="flex">
           <li
-          v-for="actor in movieStore.currentMovie.cast?.slice(0, 9)" :key="actor.key"
+          v-for="actor in serieStore.currentSerie.cast?.slice(0, 9)" :key="actor.key"
           class="bg-[#94A3B850] px-3 py-2 mt-4 rounded-xl hover:bg-[#94A3B880] mr-5 transition duration-300 ease-in-out">
           {{ actor.name }}</li>
         </ul>
