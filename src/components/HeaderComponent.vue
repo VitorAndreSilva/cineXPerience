@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router'
   <header class="flex items-center justify-between px-28 py-2">
     <router-link to="/">
       <div class="flex items-center">
-        <img src="&/general/cineXPerience.png" alt="CineXPerience" class="w-22 mr-4" />
+        <img src="/general/cineXPerience.png" alt="CineXPerience" class="w-22 mr-4" />
         <ul>
           <li>
             <p class="text-2xl"><strong>CineXPerience</strong></p>

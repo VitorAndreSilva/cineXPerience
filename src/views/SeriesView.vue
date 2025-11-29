@@ -4,13 +4,16 @@ import CardComponent from '@/components/CardComponent.vue';
 import { useSerieStore } from '@/stores/series';
 import { useGenreStore } from '@/stores/genre';
 import { onMounted, ref, computed } from 'vue';
+import Loading from 'vue-loading-overlay';
 
 const serieStore = useSerieStore();
 const genreStore = useGenreStore();
+const isLoading = ref(true);
 
 onMounted(async (genreId) => {
   await genreStore.getAllGenres('movie');
   await serieStore.listSeries(genreId);
+  isLoading.value = false;
 })
 
 const search = ref('');
@@ -19,7 +22,7 @@ const filterGenre = ref('');
 
 const filteredSeries = computed(() => {
     return serieStore.series
-    .filter(serie => 
+    .filter(serie =>
         serie.name.toLowerCase().includes(search.value.toLowerCase())
     )
     .filter(serie =>
@@ -47,6 +50,7 @@ const filteredSeries = computed(() => {
       :movies="filteredSeries"
       :type="'Serie'"
       />
+      <loading v-model:active="isLoading" is-full-page />
     </section>
   </main>
 </template>

@@ -1,6 +1,10 @@
 <script setup>
 import { defineProps, onMounted, onBeforeMount } from 'vue';
 import { useMovieStore } from '@/stores/movies';
+import { ref } from 'vue';
+import Loading from 'vue-loading-overlay';
+
+const isLoading = ref(true);
 
 const movieStore = useMovieStore();
 
@@ -18,6 +22,7 @@ const props = defineProps({
 
 onMounted(async() => {
   await movieStore.getMovieDetail(props.movieId);
+  isLoading.value = false;
 })
 </script>
 
@@ -28,6 +33,8 @@ onMounted(async() => {
       <p><i class="fa-solid fa-arrow-left mr-4"></i>Voltar</p>
     </router-link>
   </section>
+
+  <loading v-model:active="isLoading" is-full-page />
 
   <section class="px-50 py-5 flex">
     <div>
