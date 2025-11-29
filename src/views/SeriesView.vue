@@ -4,13 +4,16 @@ import CardComponent from '@/components/CardComponent.vue';
 import { useSerieStore } from '@/stores/series';
 import { useGenreStore } from '@/stores/genre';
 import { onMounted, ref, computed } from 'vue';
+import Loading from 'vue-loading-overlay';
 
 const serieStore = useSerieStore();
 const genreStore = useGenreStore();
+const isLoading = ref(true);
 
 onMounted(async (genreId) => {
   await genreStore.getAllGenres('movie');
   await serieStore.listSeries(genreId);
+  isLoading.value = false;
 })
 
 const search = ref('');
@@ -19,7 +22,7 @@ const filterGenre = ref('');
 
 const filteredSeries = computed(() => {
     return serieStore.series
-    .filter(serie => 
+    .filter(serie =>
         serie.name.toLowerCase().includes(search.value.toLowerCase())
     )
     .filter(serie =>
@@ -38,14 +41,10 @@ const filteredSeries = computed(() => {
         <h1 class="text-5xl"><strong>Séries Clássicas</strong></h1>
       </div>
       <p class="text-xl py-4 text-[#94A3B8] pt-1 pb-6 pl-32">Explore filmes lendários de 1990-2009</p>
-      <FilterComponent 
-      @filter:search="search = $event"
-      @filter:year="filterYear = $event"
-      @filter:genre="filterGenre = $event"
-      />
-      <CardComponent 
-      :movies="filteredSeries"
-      />
+      <loading v-model:active="isLoading" is-full-page />
+      <FilterComponent @filter:search="search = $event" @filter:year="filterYear = $event"
+        @filter:genre="filterGenre = $event" />
+      <CardComponent :movies="filteredSeries" />
     </section>
   </main>
 </template>

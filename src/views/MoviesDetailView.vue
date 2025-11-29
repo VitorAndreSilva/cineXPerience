@@ -1,5 +1,12 @@
 <script setup>
+import { ref } from 'vue';
+import Loading from 'vue-loading-overlay';
 
+const isLoading = ref(true);
+
+onMounted(async (genreId) => {
+  isLoading.value = false;
+})
 
 </script>
 
@@ -11,9 +18,11 @@
     </router-link>
   </section>
 
+  <loading v-model:active="isLoading" is-full-page />
+
   <section class="px-50 py-5 flex">
     <div>
-      <img class="w-110 rounded-xl border-2 border-[#94a3b840]" src="&/general/Cars_3_Official_Theatrical_Poster_US.jpg"
+      <img class="w-110 rounded-xl border-2 border-[#94a3b840]" src="/general/Cars_3_Official_Theatrical_Poster_US.jpg"
         alt="Poster">
 
       <div class="rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-10">

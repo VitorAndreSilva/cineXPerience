@@ -1,4 +1,13 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+import Loading from 'vue-loading-overlay';
+
+const isLoading = ref(true);
+
+onMounted(async (genreId) => {
+  isLoading.value = false;
+})
+</script>
 
 <template>
   <section class="px-50 py-5">
@@ -7,6 +16,8 @@
       <p><i class="fa-solid fa-arrow-left mr-4"></i>Voltar</p>
     </router-link>
   </section>
+
+  <loading v-model:active="isLoading" is-full-page />
 
   <section class="px-50 py-5 flex">
     <div>
