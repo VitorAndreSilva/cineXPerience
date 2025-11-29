@@ -10,8 +10,8 @@ export const useGameStore = defineStore('games', () => {
     const currentGame = computed(() => state.currentGame);
     const games = computed(() => state.games);
 
-    const getGameDetail = async(gameId) => {
-        const response = await apiRAWG.get(`games/${gameId}`);
+    const getGameDetail = async(gameSlug) => {
+        const response = await apiRAWG.get(`games/${gameSlug}`);
         state.currentGame = response.data;
     }
 

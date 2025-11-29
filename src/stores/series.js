@@ -12,7 +12,12 @@ export const useSerieStore = defineStore('series', () => {
 
     const getSerieDetail = async(serieId) => {
         const response = await apiTMDB.get(`tv/${serieId}`);
-        state.currentSerie = response.data;
+        const credits = await apiTMDB.get(`tv/${serieId}/credits`)
+        state.currentSerie = {
+            ...response.data, 
+            ...credits.data
+        };
+        console.log(state.currentSerie);
     }
 
     const listSeries = async(genreId) => {

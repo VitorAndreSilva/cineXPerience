@@ -50,6 +50,7 @@ const filteredGames = computed(() => {
       />
       <CardComponent
       :movies="filteredGames"
+      :type="'Game'"
       />
     </section>
   </main>

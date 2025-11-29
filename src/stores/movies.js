@@ -26,8 +26,12 @@ export const useMovieStore = defineStore('movies', () => {
     }
 
     const getMovieDetail = async(movieId) => {
-        const response = await apiTMDB.get(`discover/movie${movieId}`)
-        state.currentMovie = response.data.results;
+        const response = await apiTMDB.get(`movie/${movieId}`)
+        const credits = await apiTMDB.get(`movie/${movieId}/credits`)
+        state.currentMovie = {
+            ...response.data, 
+            ...credits.data
+        };
     }
 
     const clearMovies = async() => {

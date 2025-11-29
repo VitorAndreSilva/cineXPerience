@@ -41,10 +41,16 @@ const filteredMovies = computed(() => {
         <h1 class="text-5xl"><strong>Filmes Clássicos</strong></h1>
       </div>
       <p class="text-xl py-4 text-[#94A3B8] pt-1 pb-6 pl-32">Explore filmes lendários de 1990-2009</p>
+      <FilterComponent 
+      @filter:search="search = $event"
+      @filter:year="filterYear = $event"
+      @filter:genre="filterGenre = $event"
+      />
+      <CardComponent 
+      :movies="filteredMovies"
+      :type="'Movie'"
+      />
       <loading v-model:active="isLoading" is-full-page />
-      <FilterComponent @filter:search="search = $event" @filter:year="filterYear = $event"
-        @filter:genre="filterGenre = $event" />
-      <CardComponent :movies="filteredMovies" />
     </section>
   </main>
 </template>
