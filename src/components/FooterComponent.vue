@@ -4,7 +4,7 @@
     <hr class="text-[#10182A]">
     <ul class="text-center my-7 text-white">
       <li class="flex text-white justify-center text-xl">
-        <img src="/src/public/general/cineXPerience.png" alt="logo" class="w-22 mr-4">
+        <img src="/general/cineXPerience.png" alt="logo" class="w-22 mr-4">
         <div class="text-left mt-5">
           <p>RetroFlix</p>
           <p class="text-[#94A4B8] text-base">1990-2009</p>

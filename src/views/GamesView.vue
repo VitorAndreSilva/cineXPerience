@@ -4,13 +4,16 @@ import CardComponent from '@/components/CardComponent.vue';
 import { useGameStore } from '@/stores/games';
 import { useGenreStore } from '@/stores/genre';
 import { onMounted, ref, computed } from 'vue';
+import Loading from 'vue-loading-overlay';
 
 const gameStore = useGameStore();
 const genreStore = useGenreStore();
+const isLoading = ref(true);
 
 onMounted(async () => {
   await genreStore.getAllGenres('movie');
   await gameStore.listGames();
+    isLoading.value = false;
 })
 
 const search = ref('');
@@ -20,7 +23,7 @@ const filterGenre = ref('');
 const filteredGames = computed(() => {
   console.log("Games:", gameStore.games)
     return gameStore.games
-    .filter(game => 
+    .filter(game =>
         game.name.toLowerCase().includes(search.value.toLowerCase())
     )
     .filter(game =>
@@ -39,12 +42,13 @@ const filteredGames = computed(() => {
         <h1 class="text-5xl"><strong>Jogos Clássicos</strong></h1>
       </div>
       <p class="text-xl py-4 text-[#94A3B8] pt-1 pb-6 pl-32">Explore jogos lendários de 1990-2009</p>
-      <FilterComponent 
+      <loading v-model:active="isLoading" is-full-page />
+      <FilterComponent
       @filter:search="search = $event"
       @filter:year="filterYear = $event"
       @filter:genre="filterGenre = $event"
       />
-      <CardComponent 
+      <CardComponent
       :movies="filteredGames"
       />
     </section>
