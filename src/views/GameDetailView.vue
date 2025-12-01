@@ -22,6 +22,7 @@ const isLoading = ref(true);
 onMounted(async() => {
   await gameStore.getGameDetail(props.gameId);
   isLoading.value = false;
+});
 </script>
 
 <template>

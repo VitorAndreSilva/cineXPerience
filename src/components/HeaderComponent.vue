@@ -34,11 +34,11 @@ import { RouterLink } from 'vue-router'
           <p class="ml-2">Séries</p>
         </router-link>
       </li>
-      <li>
+      <!-- <li>
         <router-link to="/games" class="flex items-center px-4 py-2 rounded-lg hover:bg-[#101829] hover:text-white transition duration-500 ease-in-out" active-class="text-[#C582F5] bg-[#140E2D]"><i class="fa-solid fa-gamepad"></i>
           <p class="ml-2">Jogos</p>
         </router-link>
-      </li>
+      </li> -->
       <li>
         <router-link to="/about" class="flex items-center px-4 py-2 rounded-lg hover:bg-[#101829] hover:text-white transition duration-500 ease-in-out" active-class="text-[#C582F5] bg-[#140E2D]"><i class="fa-solid fa-circle-info"></i>
           <p class="ml-2">Sobre</p>

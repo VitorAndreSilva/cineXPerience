@@ -30,7 +30,7 @@ onMounted(async() => {
   <section class="px-50 py-5">
     <router-link to="/"
       class="flex items-center px-6 py-2 w-30 rounded-xl mt-8 bg-gray-800/50 border border-gray-600 hover:bg-gray-600/60 transition duration-500 ease-in-out">
-      <p><i class="fa-solid fa-arrow-left mr-4"></i>Voltar</p>
+      <p class="flex items-center"><i class="fa-solid fa-arrow-left mr-4"></i>Voltar</p>
     </router-link>
   </section>
 
@@ -67,8 +67,8 @@ onMounted(async() => {
       <h1 class="text-4xl">{{ movieStore.currentMovie.title }}</h1>
       <p class="text-[#94A3B8]">{{ movieStore.currentMovie.original_title }}</p>
       <ul class="flex my-1">
-        <li class="bg-[#94A3B850] px-3 py-2 mt-2 rounded-xl hover:bg-[#94A3B880] transition duration-300 ease-in-out">
-          {{ movieStore.currentMovie.genre_ids }}</li>
+        <!-- <li class="bg-[#94A3B850] px-3 py-2 mt-2 rounded-xl hover:bg-[#94A3B880] transition duration-300 ease-in-out" v-for="genre_id in movieStore.currentMovie.genre_ids" :key="genre_id.id">
+          {{ genre_ids }}</li> -->
       </ul>
 
       <div class=" rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-6">

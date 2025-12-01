@@ -1,18 +1,18 @@
 <script setup>
 import BannerComponent from '@/components/BannerComponent.vue';
 import CarouselComponent from '@/components/CarouselComponent.vue';
-import { useGameStore } from '@/stores/games';
+//import { useGameStore } from '@/stores/games';
 import { useMovieStore } from '@/stores/movies';
 //import { useSerieStore } from '@/stores/series';
 import { onMounted, ref } from 'vue';
 import Loading from 'vue-loading-overlay';
 
-const gameStore = useGameStore();
+//const gameStore = useGameStore();
 const movieStore = useMovieStore();
 const isLoading = ref(true);
 //const serieStore = useSerieStore();
 onMounted(async () => {
-  await gameStore.listGames();
+  //await gameStore.listGames();
   await movieStore.listMovies();
   isLoading.value = false;
 })
@@ -28,13 +28,13 @@ onMounted(async () => {
       </div>
       <CarouselComponent :movies="movieStore.filterByPopularity(25)" />
     </div>
-    <div>
+    <!-- <div>
       <div class="flex pt-10 pb-6 pl-32 text-2xl items-center">
         <i class="fa-solid fa-gamepad text-[#C084FC] mr-5"></i>
         <h2><strong>Jogos Clássicos</strong></h2>
       </div>
       <CarouselComponent :movies="gameStore.games" />
-    </div>
+    </div> -->
     <div>
       <div class="flex pt-10 pb-6 pl-32 text-2xl items-center">
         <i class="fa-regular fa-clock text-[#C084FC] mr-5"></i>
