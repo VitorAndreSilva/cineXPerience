@@ -24,20 +24,21 @@ onMounted(async() => {
   <section class="px-50 py-5">
     <router-link to="/"
       class="flex items-center px-6 py-2 w-30 rounded-xl mt-8 bg-gray-800/50 border border-gray-600 hover:bg-gray-600/60 transition duration-500 ease-in-out">
-      <p><i class="fa-solid fa-arrow-left mr-4"></i>Voltar</p>
+      <p class="flex items-center"><i class="fa-solid fa-arrow-left mr-4"></i>Voltar</p>
     </router-link>
   </section>
 
   <section class="px-50 py-5 flex">
     <div>
-      <img v-if="serieStore.currentSerie.poster_path" class="w-110 rounded-xl border-2 border-[#94a3b840]" :src="`https://image.tmdb.org/t/p/w185${serieStore.currentSerie.poster_path}`"
-        alt="Poster">
+      <img v-if="serieStore.currentSerie.poster_path" class="w-110 rounded-xl border-2 border-[#94a3b840]"
+        :src="`https://image.tmdb.org/t/p/w185${serieStore.currentSerie.poster_path}`" alt="Poster">
 
       <div class="rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-10">
         <ul>
           <li class="flex justify-between my-2">
             <h3 class="text-[#94a3b8]">Avaliação</h3>
-            <p class="items-center"><i class="fa-solid fa-star text-[#FACC15]"></i><strong>{{ Number(serieStore.currentSerie.vote_average).toFixed(1) }}</strong></p>
+            <p class="items-center"><i class="fa-solid fa-star text-[#FACC15]"></i><strong>{{
+                Number(serieStore.currentSerie.vote_average).toFixed(1) }}</strong></p>
           </li>
           <li class="flex justify-between my-2">
             <h3 class="text-[#94a3b8]">Ano</h3>
@@ -59,8 +60,9 @@ onMounted(async() => {
       <h1 class="text-4xl">{{ serieStore.currentSerie.name }}</h1>
       <p class="text-[#94A3B8]">{{ serieStore.currentSerie.original_name }}</p>
       <ul class="flex my-1">
-        <li class="bg-[#94A3B850] px-3 py-2 mt-2 rounded-xl hover:bg-[#94A3B880] transition duration-300 ease-in-out">
-          {{ serieStore.currentSerie.genre_ids }}</li>
+        <!-- <li class="bg-[#94A3B850] px-3 py-2 mt-2 rounded-xl hover:bg-[#94A3B880] transition duration-300 ease-in-out"
+          v-for="genre_id in movieStore.currentMovie.genre_ids" :key="genre_id.id">
+          {{ genre_ids }}</li> -->
       </ul>
 
       <div class=" rounded-xl border-2 border-[#94a3b840] bg-[#0C1325] p-4 mt-6">
@@ -84,10 +86,9 @@ onMounted(async() => {
         <h2 class="text-xl text-[#C084FC] mb-2">Elenco</h2>
 
         <ul class="flex">
-          <li
-          v-for="actor in serieStore.currentSerie.cast?.slice(0, 9)" :key="actor.key"
-          class="bg-[#94A3B850] px-3 py-2 mt-4 rounded-xl hover:bg-[#94A3B880] mr-5 transition duration-300 ease-in-out">
-          {{ actor.name }}</li>
+          <li v-for="actor in serieStore.currentSerie.cast?.slice(0, 9)" :key="actor.key"
+            class="bg-[#94A3B850] px-3 py-2 mt-4 rounded-xl hover:bg-[#94A3B880] mr-5 transition duration-300 ease-in-out">
+            {{ actor.name }}</li>
         </ul>
       </div>
 

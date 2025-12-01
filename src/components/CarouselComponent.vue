@@ -30,7 +30,7 @@ const props = defineProps({
 
         <img v-if="movie.poster_path" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Imagem Filme"
           class="rounded-2xl w-full" />
-        <img v-else :src="movie.background_image" alt="Imagem do jogo">
+        <img v-else :src="movie.background_image" alt="Imagem do filme">
         <div class="p-3 flex flex-col grow">
 
           <p class="font-bold">{{ movie.title || movie.name }}</p>
