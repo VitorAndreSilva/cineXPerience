@@ -1,0 +1,26 @@
+import { reactive, computed } from "vue"
+import { defineStore } from "pinia";
+import { apiTMDB } from "@/plugins/axios";
+
+export const useGenreStore = defineStore('genre', () => {
+    const state = reactive({
+        genres: [],
+        currentGenreId: null
+    });
+
+    const genres = computed(() => state.genres) ;
+    const getGenreName = (id) => {
+        const genre = state.genres.find((genre) => genre.id === id);
+        return genre?.name || "Desconhecido";
+    }
+    const getAllGenres = async (type) => {
+        const response = await apiTMDB.get(`genre/${type}/list?language=pt-BR`);
+        state.genres = response.data.genres;
+    }
+    const currentGenreId = computed(() => state.currentGenreId);
+    const setCurrentGenreId = (genreId) => {
+        state.currentGenreId = genreId;
+    }
+
+    return { genres, getGenreName, getAllGenres, currentGenreId, setCurrentGenreId };
+})
